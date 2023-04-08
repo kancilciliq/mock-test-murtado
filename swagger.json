@@ -1,0 +1,161 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Mock Test Documentation",
+      "version": "1.0.0",
+      "description": "Documentation API",
+      "contact": {
+        "name": "M. Murtadlo",
+        "email": "murtado47@gmail.com"
+      },
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000",
+        "description": "Local development server"
+      }
+    ],
+    "tags": [
+      {
+        "name": "auth",
+        "description": "Endpoints for managing register login"
+      },
+      {
+        "name": "todo list",
+        "description": "Endpoints for managing todo list"
+      }
+    ],
+    "paths": {
+      "/api/register":{
+        "post": {
+          "tags":["auth"],
+          "summary":"Create a new user",
+          "requestBody": {
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "succsess"
+            },
+            "400": {
+              "description": "The 'password' field length must be less than or equal to 4 characters long "
+            },
+            "500": {
+              "description": "server eror"
+            }
+          }
+        }
+      },
+      "/api/login": {
+        "post": {
+          "tags":["auth"],
+          "summary":"login user",
+          "requestBody": {
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "succsess login"
+            },
+            "404": {
+              "description": "password not found'"
+            },
+            "500": {
+              "description": "server eror"
+            }
+          } 
+        }
+      },
+      "/api/create-todo" : {
+        "post" : {
+          "tags": ["todo list"],
+          "summary": "create todo",
+          "requestBody": {
+            "content": {
+              "application/x-www-form-urlencoded":{
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type":"string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "succsess create todo"
+            },
+            "500": {
+              "description": "server eror"
+            }
+          }
+        }
+      },
+      "/api/get-todo" : {
+        "get" : {
+          "tags" : ["todo list"],
+          "summary": "get all todo list",
+          "responses": {
+            "200" : {
+              "description": ""
+            },
+            "500": {
+              "description": "server eror"
+            }
+          }
+        }
+      },
+      "/api/delete-todo" : {
+        "delete" : {
+          "tags": ["todo list"],
+          "summary": "delete todo",
+          "parameters": [{
+            "name": "id",
+            "in": "path"
+          }],
+          "responses": {
+            "200": {
+              "description": "succsess delete todo"
+            },
+            "500": {
+              "description": "server eror"
+            }
+          }
+        }
+      }
+    }
+}
+
+  
